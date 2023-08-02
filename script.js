@@ -29,21 +29,22 @@ async function generateFrontMatter() {
     document.getElementById('output').innerText = frontMatter;
 }
 
+// generate outline from input
 async function generateOutline(title, description, tag) {
-    const prompt = `Generate an outline for a blog post. Title: ${title}, Description: ${description}, Tag: ${tag}`;
+    // TODO Add Vercel Endpoint
+  let response = await fetch('https://blog-generator-mydxq6q1w-karlwasson.vercel.app/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      title: title,
+      description: description,
+      tag: tag
+    })
+  });
 
-    let response = await fetch('https://api.openai.com/v1/engines/davinci-codex/completions', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer YOUR_OPENAI_API_KEY'
-        },
-        body: JSON.stringify({
-            'prompt': prompt,
-            'max_tokens': 200
-        })
-    });
-
-    let data = await response.json();
-    return data.choices[0].text.trim();
+  let data = await response.json();
+  return data.outline;
 }
+
