@@ -1,10 +1,8 @@
-const API_URL = process.env.NODE_ENV === "production" 
-  ? "https://your-deployed-app.vercel.app" 
-  : "http://localhost:3000";
+const API_URL = "https://blog-generator-karlwasson.vercel.app";
 
 // generate outline from input
 async function generateOutline(title, description, tag) {
-  let response = await fetch(`${API_URL}/generateOutline`, {
+  let response = await fetch('https://blog-generator-karlwasson.vercel.app/generateOutline', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
