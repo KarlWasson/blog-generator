@@ -1,8 +1,13 @@
 const express = require('express');
 const axios = require('axios');
+const cors = require('cors'); // Require cors
 const app = express();
 
+app.use(cors({
+  origin: 'https://blog-generator-seven.vercel.app/' // replace with your front-end domain
+}));
 app.use(express.json());
+
 
 app.post('/generateOutline', async (req, res) => {
   const { title, description, tag } = req.body;
