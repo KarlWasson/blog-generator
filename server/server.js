@@ -3,11 +3,19 @@ const axios = require('axios');
 const cors = require('cors'); // Require cors
 const app = express();
 
-app.use(cors({
-  origin: 'https://blog-generator-seven.vercel.app/' // replace with your front-end domain
-}));
-app.use(express.json());
+var corsOptions = {
+  origin: ['http://localhost:3000', ' https://blog-generator-karlwasson.vercel.app'],
+  optionsSuccessStatus: 200, // For legacy browser support
+}
 
+app.use(cors(corsOptions));
+
+app.use(express.json());
+app.use(express.static('public'));
+
+app.get('/', (req, res) => {
+    res.send('Hello, world!');
+});
 
 app.post('/generateOutline', async (req, res) => {
   const { title, description, tag } = req.body;
@@ -15,7 +23,7 @@ app.post('/generateOutline', async (req, res) => {
   const prompt = `Generate an outline for a blog post. Title: ${title}, Description: ${description}, Tag: ${tag}`;
 
   try {
-    const response = await axios.post('https://api.openai.com/v1/engines/davinci-codex/completions', {
+    const response = await axios.post('https://api.openai.com/v1/chat/completions', {
       prompt: prompt,
       max_tokens: 200
     }, {
