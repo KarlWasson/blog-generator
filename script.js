@@ -32,7 +32,7 @@ async function generateFrontMatter() {
 // generate outline from input
 async function generateOutline(title, description, tag) {
     // TODO Add Vercel Endpoint
-  let response = await fetch('https://blog-generator-mydxq6q1w-karlwasson.vercel.app/', {
+  let response = await fetch('https://blog-generator-mydxq6q1w-karlwasson.vercel.app/generateOutline', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -47,4 +47,37 @@ async function generateOutline(title, description, tag) {
   let data = await response.json();
   return data.outline;
 }
+
+document.querySelector('form').addEventListener('submit', async function(event) {
+  event.preventDefault();
+
+  const title = document.getElementById('blog-title').value;
+  const description = document.getElementById('blog-description').value;
+  const tag = document.getElementById('blog-tags').value;
+
+  try {
+    let response = await fetch('http://localhost:3000/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title: title,
+        description: description,
+        tag: tag
+      })
+    });
+
+    if (response.ok) {
+      let data = await response.json();
+      console.log(data.outline);
+      // Use data.outline here, e.g. display it in your UI.
+    } else {
+      console.error('Response failed.', response);
+    }
+  } catch (error) {
+    console.error('Fetch failed.', error);
+  }
+});
+
 
