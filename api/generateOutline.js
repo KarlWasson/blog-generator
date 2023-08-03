@@ -1,6 +1,6 @@
 module.exports = (req, res) => {
   // Enable CORS
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000'); // Allow localhost
+  res.setHeader('Access-Control-Allow-Origin', 'https://blog-generator-df30rjn94-karlwasson.vercel.app/'); // Allow localhost
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', '*');
 

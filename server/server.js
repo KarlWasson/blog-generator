@@ -4,7 +4,7 @@ const cors = require('cors'); // Require cors
 const app = express();
 
 var corsOptions = {
-  origin: ['http://localhost:3000', 'https://blog-generator-karlwasson.vercel.app'],
+  origin: ['http://localhost:3000', 'https://blog-generator-df30rjn94-karlwasson.vercel.app/'],
   optionsSuccessStatus: 200, // For legacy browser support
 }
 
