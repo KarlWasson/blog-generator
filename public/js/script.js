@@ -18,6 +18,7 @@ async function generateOutline(title, description, tag) {
     let data = await response.json();
     return data.outline;
   } else {
+    console.log('Network response was not ok.')
     throw new Error('Network response was not ok.');
   }
 }

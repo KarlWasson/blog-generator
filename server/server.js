@@ -31,9 +31,10 @@ app.post('/api/generateOutline', async (req, res) => {
         'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
       }
     });
-
+    console.log(response.data)
     res.json({ outline: response.data.choices[0].text.trim() });
   } catch (error) {
+    console.log(error.message)
     res.json({ error: error.message });
   }
 });
