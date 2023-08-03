@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
     res.send('Hello, world!');
 });
 
-app.post('api/generateOutline', async (req, res) => {
+app.post('/api/generateOutline', async (req, res) => {
   const { title, description, tag } = req.body;
   
   const prompt = `Generate an outline for a blog post. Title: ${title}, Description: ${description}, Tag: ${tag}`;
