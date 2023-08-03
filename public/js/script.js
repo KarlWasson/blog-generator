@@ -2,7 +2,7 @@ const API_URL = "https://blog-generator-df30rjn94-karlwasson.vercel.app";
 
 // generate outline from input
 async function generateOutline(title, description, tag) {
-  let response = await fetch('hhttps://blog-generator-df30rjn94-karlwasson.vercel.app/generateOutline', {
+  let response = await fetch('https://blog-generator-df30rjn94-karlwasson.vercel.app/generateOutline', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
