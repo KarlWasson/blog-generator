@@ -23,14 +23,26 @@ app.post('/api/generateOutline', async (req, res) => {
   const prompt = `Generate an outline for a blog post. Title: ${title}, Description: ${description}, Tag: ${tag}`;
 
   try {
-    const response = await axios.post('https://api.openai.com/v1/chat/completions', {
-      prompt: prompt,
-      max_tokens: 200
-    }, {
-      headers: {
-        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
-      }
+    // const response = await axios.post('https://api.openai.com/v1/chat/completions', {
+    //   prompt: prompt,
+    //   max_tokens: 200
+    // }, {
+    //   headers: {
+    //     'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
+    //   }
+    // });
+    const { Configuration, OpenAIApi } = require("openai");
+
+    const configuration = new Configuration({
+      apiKey: process.env.OPENAI_API_KEY,
     });
+    const openai = new OpenAIApi(configuration);
+
+    const completion = await openai.createChatCompletion({
+      model: "gpt-3.5-turbo",
+      messages: [{"role": "system", "content": "You are a helpful assistant."}, {role: "user", content: "Hello world"}],
+    });
+    console.log(completion.data.choices[0].message);
     console.log(response.data)
     res.json({ outline: response.data.choices[0].text.trim() });
   } catch (error) {
